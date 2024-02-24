@@ -20,7 +20,7 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'rust_analyzer', 'bashls', 'clangd', 'cssls', 'dockerls', 'eslint','gopls', 'jsonls', 'marksman'},
+  ensure_installed = {'hls','jdtls','tsserver', 'rust_analyzer', 'bashls', 'clangd', 'cssls', 'dockerls', 'eslint','gopls', 'jsonls', 'marksman'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -51,6 +51,11 @@ lspconfig.ocamllsp.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
+lspconfig.hls.setup{
+    filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
+
+lspconfig.jdtls.setup{}
 -- this is the function that loads the extra snippets to luasnip
 -- from rafamadriz/friendly-snippets
 require('luasnip.loaders.from_vscode').lazy_load()

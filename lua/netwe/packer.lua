@@ -26,6 +26,9 @@ return require('packer').startup(function(use)
     requires = { {"nvim-lua/plenary.nvim"} }
   }
   use "mbbill/undotree"
+  use { 'nvim-lualine/lualine.nvim', requires = {
+      'nvim-tree/nvim-web-devicons', opt = true }
+  }
   use "tpope/vim-fugitive"
   use "github/copilot.vim"
   use {

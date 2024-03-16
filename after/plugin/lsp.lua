@@ -1,5 +1,6 @@
 local lsp_zero = require('lsp-zero')
 local lspconfig = require('lspconfig')
+local util = require 'lspconfig/util'
 
 lsp_zero.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
@@ -53,6 +54,22 @@ lspconfig.ocamllsp.setup({
 })
 lspconfig.hls.setup{
     filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
+
+lspconfig.gopls.setup {
+    on_attach = on_attach,
+    cmd = {"gopls"},
+    filetypes = {"go", "gomod", "gowork", "gotmpl"},
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+        gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+                unusedparams = true,
+            },
+        },
+    },
 }
 
 lspconfig.jdtls.setup{}

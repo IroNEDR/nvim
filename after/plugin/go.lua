@@ -1,6 +1,4 @@
 require('go').setup()
-require("go.format").gofmt()  -- gofmt only
-require("go.format").goimport()  -- goimport + gofmt
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {

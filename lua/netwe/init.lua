@@ -33,17 +33,6 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function () 
-        local configs = require("nvim-treesitter.configs")
-
-        configs.setup({
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "typescript", "go", "rust", "query", "heex", "javascript", "html" },
-            sync_install = false,
-            prefer_git = true,
-            highlight = { enable = true },
-            indent = { enable = true },  
-            })
-        end
     },
     "nvim-lua/plenary.nvim",
     {

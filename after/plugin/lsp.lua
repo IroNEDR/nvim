@@ -21,7 +21,7 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'jdtls','tsserver', 'rust_analyzer', 'bashls', 'clangd', 'cssls', 'dockerls', 'eslint','gopls', 'jsonls', 'marksman'},
+  ensure_installed = {'lua_ls','jdtls','tsserver','pyright','rust_analyzer', 'bashls', 'clangd', 'cssls', 'dockerls', 'eslint','gopls', 'jsonls', 'marksman'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -31,9 +31,9 @@ require('mason-lspconfig').setup({
   }
 })
 
-local c = vim.lsp.protocol.make_client_capabilities()
-c.textDocument.completion.completionItem.snippetSupport = true
-c.textDocument.completion.completionItem.resolveSupport = {
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {
         'documentation',
         'detail',
@@ -49,7 +49,6 @@ lspconfig.ocamllsp.setup({
     cmd = { "ocamllsp" },
     filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
     root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
-    on_attach = on_attach,
     capabilities = capabilities
 })
 lspconfig.hls.setup{
@@ -57,7 +56,6 @@ lspconfig.hls.setup{
 }
 
 lspconfig.gopls.setup {
-    on_attach = on_attach,
     cmd = {"gopls"},
     filetypes = {"go", "gomod", "gowork", "gotmpl"},
     root_dir = util.root_pattern("go.work", "go.mod", ".git"),

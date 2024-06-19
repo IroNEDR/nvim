@@ -53,13 +53,14 @@ require("lazy").setup({
     "github/copilot.vim",
     "ray-x/go.nvim",
     "ray-x/guihua.lua",
-    --{ "vhyrro/luarocks.nvim", priority = 1000, config = true, },
+    { "vhyrro/luarocks.nvim", priority = 1000, config = true, },
+    { "nvim-neotest/nvim-nio" },
+    { "pysan3/pathlib.nvim" },
     {
         "nvim-neorg/neorg",
-       -- dependencies = { "luarocks.nvim" },
+        dependencies = { "luarocks.nvim" },
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-        tag = "v7.0.0", -- Pin Neorg to the latest stable release
-       -- config = true,
+        version = "*",
     }
 
 })

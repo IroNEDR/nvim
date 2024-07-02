@@ -26,7 +26,7 @@ require("lazy").setup({
             vim.cmd([[colorscheme kanagawa]])
         end,
     },
-    { 
+    {
         'nvim-telescope/telescope.nvim', tag = '0.1.6',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
@@ -61,6 +61,22 @@ require("lazy").setup({
         dependencies = { "luarocks.nvim" },
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
         version = "*",
-    }
+    },
+    {
+     "hedyhli/outline.nvim",
+      config = function()
+        -- Example mapping to toggle outline
+        vim.keymap.set("n", "<leader>mm", "<cmd>Outline<CR>",
+          { desc = "Toggle Outline" })
 
+        require("outline").setup {
+          -- Your setup opts here (leave empty to use defaults)
+        }
+      end,
+    },
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        config = true
+    }
 })

@@ -73,6 +73,7 @@ lspconfig.gopls.setup {
 }
 
 lspconfig.jdtls.setup{}
+lspconfig.eslint.setup{}
 -- this is the function that loads the extra snippets to luasnip
 -- from rafamadriz/friendly-snippets
 require('luasnip.loaders.from_vscode').lazy_load()

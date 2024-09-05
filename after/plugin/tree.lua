@@ -11,11 +11,12 @@ local function attach_fn(bufnr)
     -- custom mappings
     vim.keymap.set('n', '<C-t>', api.tree.toggle)
     vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+
   end
 
   -- pass to setup along with your other options
   require("nvim-tree").setup {
-    ---
     on_attach = attach_fn,
-    ---
+    view = { adaptive_size = true },
+    update_focused_file = { enable = true }
   }

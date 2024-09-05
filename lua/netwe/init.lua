@@ -61,6 +61,7 @@ require("lazy").setup({
     "github/copilot.vim",
     "ray-x/go.nvim",
     "ray-x/guihua.lua",
+    "ziglang/zig.vim",
     { "vhyrro/luarocks.nvim", priority = 1000, config = true, },
     { "nvim-neotest/nvim-nio" },
     { "pysan3/pathlib.nvim" },

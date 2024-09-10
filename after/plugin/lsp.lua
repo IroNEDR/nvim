@@ -22,7 +22,8 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'lua_ls','jdtls','tsserver','pyright','rust_analyzer', 'bashls', 'clangd', 'cssls', 'dockerls', 'eslint','gopls', 'jsonls', 'marksman'},
+  ensure_installed = {'lua_ls','jdtls','pyright','rust_analyzer', 'bashls',
+        'clangd', 'cssls', 'dockerls', 'eslint','gopls', 'jsonls', 'marksman', 'zls'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -60,6 +61,7 @@ lspconfig.hls.setup{
 lspconfig.gopls.setup {
     cmd = {"gopls"},
     filetypes = {"go", "gomod", "gowork", "gotmpl"},
+    capabilities = capabilities,
     root_dir = util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
         gopls = {
@@ -71,6 +73,13 @@ lspconfig.gopls.setup {
         },
     },
 }
+
+lspconfig.zls.setup({
+    capabilities = capabilities,
+    cmd = { "zls" },
+    root_dir = lspconfig.util.root_pattern("zls.json", "build.zig", ".git"),
+	single_file_support = true,
+})
 
 lspconfig.jdtls.setup{}
 lspconfig.eslint.setup{}

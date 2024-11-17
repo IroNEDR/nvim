@@ -22,8 +22,8 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'lua_ls','jdtls','pyright','rust_analyzer', 'bashls',
-        'clangd', 'cssls', 'dockerls', 'eslint','gopls', 'jsonls', 'marksman', 'zls'},
+  ensure_installed = {'lua_ls','jdtls','pyright','rust_analyzer', 'bashls','eslint', 'ts_ls',
+        'clangd', 'cssls', 'dockerls','gopls', 'jsonls', 'marksman', 'zls'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -51,7 +51,7 @@ local cmp_select = {behavior = cmp.SelectBehavior.Select}
 lspconfig.ocamllsp.setup({
     cmd = { "ocamllsp" },
     filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
-    root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+    root_dir = lspconfig.util.root_pattern("*.opam", "esy.json", ".git", "dune-project", "dune-workspace"),
     capabilities = capabilities
 })
 lspconfig.hls.setup{
@@ -82,7 +82,14 @@ lspconfig.zls.setup({
 })
 
 lspconfig.jdtls.setup{}
-lspconfig.eslint.setup{}
+lspconfig.ts_ls.setup{
+    capabilities = capabilities,
+    root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+}
+lspconfig.eslint.setup{
+    capabilities = capabilities,
+    root_dir = util.root_pattern("package.json", ".eslint.rc", ".git"),
+}
 -- this is the function that loads the extra snippets to luasnip
 -- from rafamadriz/friendly-snippets
 require('luasnip.loaders.from_vscode').lazy_load()
